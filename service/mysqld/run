@@ -1,0 +1,5 @@
+#!/bin/bash
+
+trap "mysqld stop" EXIT
+
+exec /docker-entrypoint.sh mysqld $( [ "$USE_HIGHMEM" == '1' ] && echo "--defaults-extra-file=/etc/mysql/my.cnf.highmem" ) --log-error=/var/log/mysql-error

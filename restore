@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+. /usr/local/etc/innobackupex_config
+trap "rm -rf $BACKUP_DATADIR; sv start mysqld" EXIT
+
+if [ -d $BACKUP_DATADIR ]; then
+  rm -rf $BACKUP_DATADIR
+fi
+
+tar xjp
+sv stop mysqld
+
+rm -rf /var/lib/mysql/*
+
+innobackupex --use-memory=2G --apply-log "$BACKUP_DATADIR"
+innobackupex --use-memory=2G --copy-back "$BACKUP_DATADIR"
