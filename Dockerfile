@@ -4,9 +4,9 @@ COPY my.cnf.highmem /etc/mysql/my.cnf.highmem
 
 RUN echo "deb http://repo.percona.com/apt jessie main" > /etc/apt/sources.list.d/percona.list
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 1C4CBDCDCD2EFD2A
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y tar bzip2 unzip wget runit python3 vim
-RUN apt-get install -y --force-yes percona-xtrabackup
+RUN apt-get -q update && apt-get -q upgrade -y
+RUN apt-get -q install -y tar bzip2 unzip wget runit python3 vim
+RUN apt-get -q install -y --force-yes percona-xtrabackup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /etc/my_init.d
