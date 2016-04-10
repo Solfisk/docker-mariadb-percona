@@ -9,6 +9,7 @@ RUN apt-get -q install -y tar bzip2 unzip wget runit python3 vim
 RUN apt-get -q install -y --force-yes percona-xtrabackup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+ADD /docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
 RUN mkdir -p /etc/my_init.d
 
 COPY my_init /sbin/my_init
