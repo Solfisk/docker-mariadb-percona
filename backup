@@ -9,7 +9,7 @@ set -e
 touch /var/log/backup.log
 echo "Backup d: $(date)" >> /var/log/backup.log
 
-innobackupex --use-memory=4G --no-timestamp  --user root --password root "$BACKUP_DATADIR" >> /var/log/backup.log 2>&1
+innobackupex --use-memory=4G --no-timestamp  --user root "$BACKUP_DATADIR" >> /var/log/backup.log 2>&1
 
 tar cj "$BACKUP_DATADIR"
 
